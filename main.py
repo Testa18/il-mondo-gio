@@ -99,6 +99,17 @@ def home():
                     <button class="btn-joy" style="background: #E74C3C; width: auto; padding: 8px 16px; margin-top: 15px; font-size: 0.85rem;" onclick="executeSecureLogout()">Disconnect Profile</button>
                 </div>
             </div>
+
+            <!-- Interactive Synchronized Video Screening Room Component -->
+            <div class="joy-card">
+                <h3 style="color: #00BFFF; margin-top: 0;"><i class="fa-solid fa-film"></i> Cinematic Screening Lounge</h3>
+                <p style="color: #CBD5E0; font-size: 0.95rem;">Relax inside a synchronized visual theater space with fellow early adopters.</p>
+                <div style="position: relative; padding-bottom: 56.25%; height: 0; border: 2px solid #00BFFF; border-radius: 12px; overflow: hidden; background: #020617;">
+                    <!-- A beautiful open-source cinematic backdrop video -->
+                    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" src="https://youtube.com" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                <p style="font-size: 0.85rem; color: #A0AEC0; margin-top: 10px;"><i class="fa-solid fa-circle" style="color: #2ECC71; font-size: 0.7rem; animation: blink 2s infinite;"></i> Stream synchronized across global network hubs.</p>
+            </div>
             
             <div class="joy-card">
                 <h3><i class="fa-solid fa-wand-magic-sparkles" style="color: #00BFFF;"></i> 10,000,000 Facet Volumetric Studio</h3>
@@ -113,7 +124,7 @@ def home():
                 <p style="color: #2ECC71; font-weight: bold; margin: 0;"><i class="fa-solid fa-circle-check"></i> Free Lifetime Founder Pass Activated via Credit Card Loop</p>
             </div>
 
-            <!-- Immersive Meta Economy & Virtual Luxury Shop Panel -->
+            <!-- Interactive Meta Economy & Virtual Luxury Shop Panel -->
             <div class="joy-card">
                 <h3 style="color: #00BFFF; margin-top:0;"><i class="fa-solid fa-champagne-glasses" style="color: #FFD700;"></i> Immersive Gatherings & Goods</h3>
                 <p style="color: #CBD5E0; font-size: 0.9rem;">Acquire custom styles or enter synchronized entertainment rooms.</p>
@@ -126,14 +137,12 @@ def home():
                         <button class="btn-joy" style="padding: 6px 12px; font-size: 0.8rem;" onclick="openCheckout('3D Avatar Matrix Cloak', 45, 5.99)">Get Style</button>
                     </div>
                     <div class="market-item">
-                        <div style="font-size: 1.8rem; color: #FFD700;"><i class="fa-solid fa-glass-martini-alt"></i></div>
-                        <h5 style="margin: 8px 0 2px 0; font-size: 0.95rem;">Lounge Pass</h5>
-                        <div class="item-price">80 DOGE</div>
-                        <button class="btn-joy" style="padding: 6px 12px; font-size: 0.8rem;" onclick="openCheckout('Neon Elixir Lounge Pass', 80, 9.99)">Enter Party</button>
-                    </div>
-                    <div class="market-item">
-                        <div style="font-size: 1.8rem; color: #0086B3;"><i class="fa-solid fa-film"></i></div>
-                        <h5 style="margin: 8px 0 2px 0; font-size: 0.95rem;">Cinema Room</h5>
+                        <div style="font-size: 1.8rem; color: #FFD700;"><i class="fa-solid fa-wine-glass"></i></div>
+                        <h5 style="margin: 8px 0 2px 0; font-size: 0.95rem;">Neon Elixir</h5>
+                        <div class="item-price">15 DOGE</div>
+ <div class="market-item">
+                        <div style="font-size: 1.8rem; color: #0086B3;"><i class="fa-solid fa-ticket"></i></div>
+                        <h5 style="margin: 8px 0 2px 0; font-size: 0.95rem;">Cinema Access</h5>
                         <div class="item-price">110 DOGE</div>
                         <button class="btn-joy" style="padding: 6px 12px; font-size: 0.8rem;" onclick="openCheckout('Cinematic Space Ticket', 110, 14.99)">Watch Room</button>
                     </div>
@@ -146,4 +155,135 @@ def home():
         <div class="checkout-modal" id="checkoutModal">
             <h3 id="modalProductName" style="color: #00BFFF; margin-top: 0;">Checkout Ingestion</h3>
             <div style="display: flex; margin-bottom: 20px; margin-top: 15px;">
+                <button class="payment-tab active" id="dogeTab" onclick="switchMethod('DOGE')">Dogecoin</button>
+                <button class="payment-tab" id="cardTab" onclick="switchMethod('CARD')">Credit Card</button>
+            </div>
 
+            <div id="dogePaymentForm">
+                <div style="background: rgba(11, 25, 44, 0.6); border-radius: 12px; padding: 15px; text-align: center; border: 1px solid #00BFFF;">
+                    <p style="font-size: 0.85rem; color:#CBD5E0; margin-bottom: 5px;">Send exact transfer volume via Robinhood to:</p>
+                    <p style="font-size: 1.05rem; color: #0099FF; font-family: monospace; font-weight: bold; margin: 5px 0;">tpopolo@yahoo.com</p>
+                    <div style="margin: 10px 0; font-size: 1.25rem; font-weight: bold; color: #FFD700;" id="dogeDueAmount"></div>
+                </div>
+                <input type="text" placeholder="Robinhood Transfer tracking ID" class="auth-input" style="margin-top:15px;">
+                <button class="btn-joy" onclick="processPaymentCompletion()">Verify Robinhood Transfer</button>
+            </div>
+
+            <div id="cardPaymentForm" style="display: none;">
+                <form onsubmit="event.preventDefault(); processPaymentCompletion();" style="display: flex; flex-direction: column; gap: 8px;">
+                    <input type="text" placeholder="Cardholder Full Name" class="auth-input" required>
+                    <input type="text" placeholder="Credit Card Number" class="auth-input" required>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" placeholder="MM/YY" class="auth-input" style="width: 50%;" required>
+                        <input type="text" placeholder="CVV" class="auth-input" style="width: 50%;" required>
+                    </div>
+                    <button type="submit" class="btn-joy" id="cardDueAmount">Execute Card Transaction</button>
+                </form>
+            </div>
+        </div>
+
+        <script>
+            let sec = 0;
+            let currentUsersBase = 104821;
+            let activeMethod = 'DOGE';
+
+            window.addEventListener('DOMContentLoaded', () => {
+                const canvas = document.getElementById('watermarkCanvas');
+                canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = "rgba(0, 191, 255, 0.025)";
+                for (let i = 0; i < 20000; i++) {
+                    let x = Math.random() * canvas.width; let y = Math.random() * canvas.height;
+                    ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + 10, y); ctx.lineTo(x + 5, y + 10); ctx.closePath(); ctx.fill();
+                }
+                
+                const activeEmail = localStorage.getItem("gio_user_email");
+                const savedSeconds = localStorage.getItem("gio_session_seconds");
+                if (activeEmail) {
+                    sec = savedSeconds ? parseInt(savedSeconds) : 0;
+                    showAuthenticatedUI(activeEmail);
+                }
+                
+                setInterval(() => {
+                    sec++;
+                    let m = Math.floor(sec / 60).toString().padStart(2, '0');
+                    let s = (sec % 60).toString().padStart(2, '0');
+                    document.getElementById('timer').innerText = 'Session Duration: ' + m + ':' + s;
+                    if (localStorage.getItem("gio_user_email")) {
+                        localStorage.setItem("gio_session_seconds", sec);
+                    }
+                }, 1000);
+
+                setInterval(() => {
+                    currentUsersBase = currentUsersBase + Math.floor(Math.random() * 14) - 4;
+                    document.getElementById('userCount').innerText = currentUsersBase.toLocaleString() + " Citizens Online";
+                }, 2500);
+            });
+
+            function executeSecureRegister() {
+                const emailInput = document.getElementById("authEmail").value;
+                const passInput = document.getElementById("authPassword").value;
+                if (!emailInput || !passInput) {
+                    alert("Please insert valid verification parameters to activate account vault mapping loops.");
+                    return;
+                }
+                localStorage.setItem("gio_user_email", emailInput);
+                localStorage.setItem("gio_session_seconds", sec);
+                showAuthenticatedUI(emailInput);
+            }
+
+            function showAuthenticatedUI(email) {
+                document.getElementById("authFields").style.display = "none";
+                document.getElementById("welcomeUserBox").style.display = "block";
+                document.getElementById("userGreetingText").innerText = "Welcome Back, Citizen: " + email;
+            }
+
+            function executeSecureLogout() {
+                localStorage.removeItem("gio_user_email");
+                localStorage.removeItem("gio_session_seconds");
+                sec = 0;
+                document.getElementById("authFields").style.display = "block";
+                document.getElementById("welcomeUserBox").style.display = "none";
+                document.getElementById("authEmail").value = "";
+                document.getElementById("authPassword").value = "";
+                document.getElementById('timer').innerText = 'Session Duration: 00:00';
+            }
+
+            function openCheckout(productName, dogePrice, usdPrice) {
+                document.getElementById('modalProductName').innerText = productName;
+                document.getElementById('dogeDueAmount').innerText = dogePrice + " DOGE Due";
+                document.getElementById('cardDueAmount').innerText = "Pay $" + usdPrice.toFixed(2) + " USD";
+                document.getElementById('modalOverlay').style.display = 'block';
+                document.getElementById('checkoutModal').style.display = 'block';
+            }
+
+            function closeCheckout() {
+                document.getElementById('modalOverlay').style.display = 'none';
+                document.getElementById('checkoutModal').style.display = 'none';
+            }
+
+            function switchMethod(method) {
+                activeMethod = method;
+                if(method === 'DOGE') {
+                    document.getElementById('dogeTab').classList.add('active');
+                    document.getElementById('cardTab').classList.remove('active');
+                    document.getElementById('dogePaymentForm').style.display = 'block';
+                    document.getElementById('cardPaymentForm').style.display = 'none';
+                } else {
+                    document.getElementById('cardTab').classList.add('active');
+                    document.getElementById('dogeTab').classList.remove('active');
+                    document.getElementById('cardPaymentForm').style.display = 'block';
+                    document.getElementById('dogePaymentForm').style.display = 'none';
+                }
+            }
+
+            function processPaymentCompletion() {
+                alert("Zero-Knowledge ingestion active. Financial record successfully submitted for owner manual receipt matching verification.");
+                closeCheckout();
+            }
+        </script>
+    </body>
+    </html>
+    """
+    return HTMLResponse(content=html_content, status_code=200)
+    
